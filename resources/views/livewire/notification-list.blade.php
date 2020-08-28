@@ -2,7 +2,7 @@
     <ul>
         @foreach($mensajes as $i=> $mensaje)
         <li class="border-t border-gray-200">
-            <a href="{{$mensaje->data['action_url']}}" target="_blank" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+            <a href="{{$mensaje->data['action']}}" target="_blank" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
             <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                 <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
@@ -26,7 +26,7 @@
                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>
-                        {{$mensaje->data['action_url']}}
+                        {{$mensaje->data['action']}}
                     </div>
                 </div>
                 <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
@@ -34,7 +34,7 @@
                     <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                     </svg>
                     <span>
-                        <time datetime="{{$mensaje->data['created']}}">{{$mensaje->data['created']}}</time>
+                        <time datetime="{{$mensaje->data['created']}}">{{$mensaje->data['created_format']}}</time>
                     </span>
                 </div>
                 </div>

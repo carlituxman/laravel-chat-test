@@ -172,7 +172,8 @@ var NOTIF = {
             .catch(error => console.log(error))
             .then(() => { 
                 HELPER.statusEnd("notification sent");
-                this.loading = false 
+                this.loading = false
+                window.livewire.emit('notificationSent');
             })
     },
 

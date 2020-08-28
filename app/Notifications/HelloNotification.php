@@ -12,15 +12,21 @@ use NotificationChannels\WebPush\WebPushChannel;
 class HelloNotification extends Notification
 {
     use Queueable;
+    
+    protected $title;
+    protected $body;
+    protected $action;
 
     /**
      * Create a new notification instance.
     *
     * @return void
     */
-    public function __construct($text)
+    public function __construct($title, $body=null, $action=null)
     {
-        $this->text=$text;
+        $this->title = $title;
+        $this->body = $body;
+        $this->action = $action;
     }
 
     /**
@@ -42,11 +48,18 @@ class HelloNotification extends Notification
     */
     public function toArray($notifiable)
     {
+        $now = Carbon::now();
+
+        $t = $this->title ?? "title";
+        $b = $this->body ?? "body";
+        $a = $this->action ?? 'https://laravel.com';
+
         return [
-            'title' => 'Hello from Laravel!',
-            'body' => 'It work',
-            'action_url' => 'https://laravel.com',
-            'created' => Carbon::now()->toIso8601String()
+            'title' => $t,
+            'body' => $b,
+            'action' => $a,
+            'created' => $now->toIso8601String(),
+            'created_format' => $now->format('d/m/Y H:i')
         ];
     }
 
@@ -59,11 +72,15 @@ class HelloNotification extends Notification
     */
     public function toWebPush($notifiable, $notification)
     {
+        $t = $this->title ?? "title";
+        $b = $this->body ?? "body";
+        $a = $this->action ?? 'https://laravel.com';
+
         return (new WebPushMessage)
-            ->title('Hello from Laravel!')
+            ->title($t)
             ->icon('/notification-icon.png')
-            ->body($this->text)
-            ->action('View app', 'view_app')
+            ->body($b)
+            ->action($a, $a)
             ->data(['id' => $notification->id]);
     }
 }

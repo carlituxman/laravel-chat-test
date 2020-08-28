@@ -10,7 +10,8 @@ use App\Notifications\HelloNotification;
 use App\User;
 use NotificationChannels\WebPush\PushSubscription;
 
-
+use Illuminate\Foundation\Inspiring;
+use Str;
 class NotificationController extends Controller
 {
     /**
@@ -57,12 +58,16 @@ class NotificationController extends Controller
     */
     public function store(Request $request)
     {
+        $titulo = Str::random(12);
+        $body = Inspiring::quote();
+        $action = null;
+
         // Send notification to other user 
-        // $to= User::where("id",2)->first();
+        // $to = User::where("id",2)->first();
         // $to->notify(new HelloNotification("Hei, its work"));
 
         //Send notification to yourself
-        $request->user()->notify(new HelloNotification("Hei, its work"));
+        $request->user()->notify(new HelloNotification($titulo, $body, $action));
 
         return response()->json('Notification sent.', 201);
     }
